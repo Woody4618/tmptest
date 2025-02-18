@@ -1,7 +1,7 @@
 name: Test Program
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       program:
         description: "Program to test"
@@ -19,9 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: Woody4618/tmptest/run-build@main
-        with:
-          program: ${{ inputs.program }}
+      - uses: Woody4618/tmptest/extract-versions@main
+        id: versions
 
       # - uses: https://github.com/Woody4618/tmptest/setup-all@main
       #   with:
