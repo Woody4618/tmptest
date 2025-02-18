@@ -1,0 +1,33 @@
+name: Test Program
+
+on:
+  workflow_call:
+    inputs:
+      program:
+        description: "Program to test"
+        required: true
+        type: string
+      branch:
+        description: "Branch to test"
+        required: false
+        type: string
+        default: "*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: https://github.com/Woody4618/tmptest/extract-versions@main
+        id: versions
+
+      - uses: https://github.com/Woody4618/tmptest/setup-all@main
+        with:
+          solana_version: ${{ steps.versions.outputs.solana_version }}
+          anchor_version: ${{ steps.versions.outputs.anchor_version }}
+          node_version: 18
+
+      - uses: https://github.com/Woody4618/tmptest//run-tests@main
+        with:
+          program: ${{ inputs.program }}

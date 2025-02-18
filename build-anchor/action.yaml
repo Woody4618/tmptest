@@ -1,0 +1,40 @@
+name: "Build Anchor"
+description: "Build Anchor"
+inputs:
+  program:
+    description: "Program to build"
+    required: true
+  features:
+    description: "Features that will be passed into the build"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Build Program
+      shell: bash
+      run: |
+        echo "Building Anchor program: ${{ inputs.program }} to get IDL"
+        FEATURES="${{ inputs.features }}"
+        if [ ! -z "$FEATURES" ]; then
+          FEATURES="--features $FEATURES"
+        fi
+
+        anchor build -p ${{ inputs.program }} -- $FEATURES
+    - name: Copy artifacts from container
+      shell: bash
+      run: |
+        mkdir -p ./build-artifacts/so
+        mkdir -p ./build-artifacts/idl
+
+        echo "Current working directory: $(pwd)"
+        echo "Listing target directory:"
+        ls -la target/deploy/
+        ls -la target/idl/
+
+        # Direct copy without using Docker commands
+        cp -v target/deploy/${{ inputs.program }}.so ./build-artifacts/so/
+        cp -v target/idl/${{ inputs.program }}.json ./build-artifacts/idl/
+
+        echo "Checking copied files:"
+        ls -la ./build-artifacts/so/
+        ls -la ./build-artifacts/idl/

@@ -1,0 +1,29 @@
+name: "Build Verified"
+description: "Builds a Solana program using solana-verify"
+inputs:
+  program:
+    description: "The program to build and upload"
+    required: true
+  features:
+    description: "Features to enable during build"
+    required: false
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    # Add Docker socket mounting
+    - name: Setup Docker
+      shell: bash
+      run: |
+        sudo chmod 666 /var/run/docker.sock
+
+    - name: Build Verified
+      shell: bash
+      run: |
+        FEATURES="${{ inputs.features }}"
+        if [ ! -z "$FEATURES" ]; then
+          FEATURES="--features $FEATURES"
+        fi
+        # Run solana-verify directly without Docker
+        ~/.cargo/bin/solana-verify build --library-name ${{ inputs.program }} -- $FEATURES
