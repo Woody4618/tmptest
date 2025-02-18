@@ -1,4 +1,5 @@
 name: Test Program
+description: "composite run action"
 
 on:
   workflow_call:
@@ -13,21 +14,20 @@ on:
         type: string
         default: "*"
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
 
-      - uses: Woody4618/tmptest/extract-versions@main
-        id: versions
+    - uses: Woody4618/tmptest/extract-versions@main
+      id: versions
 
-      # - uses: https://github.com/Woody4618/tmptest/setup-all@main
-      #   with:
-      #     solana_version: ${{ steps.versions.outputs.solana_version }}
-      #     anchor_version: ${{ steps.versions.outputs.anchor_version }}
-      #     node_version: 18
+    # - uses: https://github.com/Woody4618/tmptest/setup-all@main
+    #   with:
+    #     solana_version: ${{ steps.versions.outputs.solana_version }}
+    #     anchor_version: ${{ steps.versions.outputs.anchor_version }}
+    #     node_version: 18
 
-      # - uses: https://github.com/Woody4618/tmptest//run-tests@main
-      #   with:
-      #     program: ${{ inputs.program }}
+    # - uses: https://github.com/Woody4618/tmptest//run-tests@main
+    #   with:
+    #     program: ${{ inputs.program }}
