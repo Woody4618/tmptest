@@ -19,9 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: solana-developers/github-actions/.github/actions/extract-versions@main
-        id: versions1
-
       - uses: Woody4618/tmptest/extract-versions@main
         id: versions
 
