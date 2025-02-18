@@ -22,15 +22,15 @@ jobs:
       - uses: solana-developers/github-actions/.github/actions/extract-versions@main
         id: versions1
 
-      - uses: https://github.com/Woody4618/tmptest/extract-versions@main
-        id: versions
+      # - uses: https://github.com/Woody4618/tmptest/extract-versions@main
+      #   id: versions
 
-      - uses: https://github.com/Woody4618/tmptest/setup-all@main
-        with:
-          solana_version: ${{ steps.versions.outputs.solana_version }}
-          anchor_version: ${{ steps.versions.outputs.anchor_version }}
-          node_version: 18
+      # - uses: https://github.com/Woody4618/tmptest/setup-all@main
+      #   with:
+      #     solana_version: ${{ steps.versions.outputs.solana_version }}
+      #     anchor_version: ${{ steps.versions.outputs.anchor_version }}
+      #     node_version: 18
 
-      - uses: https://github.com/Woody4618/tmptest//run-tests@main
-        with:
-          program: ${{ inputs.program }}
+      # - uses: https://github.com/Woody4618/tmptest//run-tests@main
+      #   with:
+      #     program: ${{ inputs.program }}
