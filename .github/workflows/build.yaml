@@ -1,7 +1,7 @@
 name: Test Program
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       program:
         description: "Program to test"
