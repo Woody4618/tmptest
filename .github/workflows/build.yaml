@@ -22,8 +22,8 @@ jobs:
       - uses: solana-developers/github-actions/.github/actions/extract-versions@main
         id: versions1
 
-      # - uses: https://github.com/Woody4618/tmptest/extract-versions@main
-      #   id: versions
+      - uses: https://github.com/Woody4618/tmptest/extract-versions@main
+        id: versions
 
       # - uses: https://github.com/Woody4618/tmptest/setup-all@main
       #   with:
