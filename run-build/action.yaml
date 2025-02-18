@@ -1,18 +1,16 @@
 name: Test Program
 description: "composite run action"
 
-on:
-  workflow_call:
-    inputs:
-      program:
-        description: "Program to test"
-        required: true
-        type: string
-      branch:
-        description: "Branch to test"
-        required: false
-        type: string
-        default: "*"
+inputs:
+  program:
+    description: "Program to test"
+    required: true
+    type: "string"
+  branch:
+    description: "Branch to test"
+    required: false
+    type: "string"
+    default: "*"
 
 runs:
   using: "composite"
